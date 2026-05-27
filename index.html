@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anatomie d'un navire — schéma interactif</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Anatomie d'un navire</h1>
+    <p class="subtitle">Schéma interactif — cliquez sur les points pour découvrir chaque élément</p>
+  </header>
+
+  <main class="ship-container">
+    <!-- Conteneur de l'image et des points d'annotation -->
+    <div class="ship-wrapper" id="shipWrapper">
+      <img
+        src="assets/navire.png"
+        alt="Schéma d'un navire à trois mâts"
+        class="ship-image"
+        id="shipImage"
+      />
+      <!-- Les hotspots sont injectés en JS pour rester synchronisés avec les données -->
+    </div>
+
+    <!-- Légende -->
+    <aside class="legend">
+      <h2>Légende</h2>
+      <ul id="legendList"></ul>
+    </aside>
+  </main>
+
+  <!-- Modale d'information -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+      <div class="modal-letter" id="modalLetter">A</div>
+      <h3 id="modalTitle">Titre</h3>
+      <p id="modalDescription">Description</p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
