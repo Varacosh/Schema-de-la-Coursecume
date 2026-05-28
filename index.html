@@ -3,32 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anatomie d'un navire — schéma interactif</title>
+  <title>Schéma interactif de la Coursécume</title>
+
+  <!-- Polices serif classiques pour une ambiance d'encyclopédie marine -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="page-header">
-    <h1>Anatomie d'un navire</h1>
-    <p class="subtitle">Schéma interactif — cliquez sur les points pour découvrir chaque élément</p>
-  </header>
 
-  <main class="ship-container">
-    <!-- Conteneur de l'image et des points d'annotation -->
-    <div class="ship-wrapper" id="shipWrapper">
-      <img
-        src="assets/navire.png"
-        alt="Schéma d'un navire à trois mâts"
-        class="ship-image"
-        id="shipImage"
-      />
-      <!-- Les hotspots sont injectés en JS pour rester synchronisés avec les données -->
-    </div>
+  <main class="page">
 
-    <!-- Légende -->
-    <aside class="legend">
-      <h2>Légende</h2>
-      <ul id="legendList"></ul>
-    </aside>
+    <!-- En-tête éditorial -->
+    <header class="masthead">
+      <div class="ornament-top" aria-hidden="true">
+        <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="0.6" />
+          <circle cx="90" cy="10" r="1.5" fill="currentColor" />
+          <path d="M 95,10 Q 100,4 105,10 Q 100,16 95,10" fill="none" stroke="currentColor" stroke-width="0.6" />
+          <circle cx="110" cy="10" r="1.5" fill="currentColor" />
+          <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="0.6" />
+        </svg>
+      </div>
+
+      <p class="eyebrow">Schéma interactif d'un navire à trois mâts</p>
+
+      <h1 class="title">
+        <span class="article">La</span>
+        <span class="proper-name">Coursécume</span>
+      </h1>
+
+      <p class="tagline">
+        <em>toute expliquée</em>
+      </p>
+
+      <div class="ornament-bottom" aria-hidden="true">
+        <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="15" x2="120" y2="15" stroke="currentColor" stroke-width="0.5" />
+          <g transform="translate(150, 15)">
+            <circle cx="0" cy="0" r="2" fill="currentColor" />
+            <circle cx="-12" cy="0" r="1" fill="currentColor" />
+            <circle cx="12" cy="0" r="1" fill="currentColor" />
+          </g>
+          <line x1="180" y1="15" x2="300" y2="15" stroke="currentColor" stroke-width="0.5" />
+        </svg>
+      </div>
+
+      <p class="instruction">
+        <span>Cliquez sur les points du schéma pour explorer chaque élément</span>
+      </p>
+    </header>
+
+    <!-- Schéma du navire avec hotspots -->
+    <section class="ship-section">
+      <div class="ship-wrapper" id="shipWrapper">
+        <img
+          src="assets/medium_1_beige_chaud.png"
+          alt="Schéma anatomique du navire La Coursécume"
+          class="ship-image"
+          id="shipImage"
+        />
+      </div>
+    </section>
+
+    <!-- Pied de page sobre -->
+    <footer class="colophon">
+      <p>
+        <span class="dot">·</span>
+        Planche d'anatomie navale
+        <span class="dot">·</span>
+      </p>
+    </footer>
+
   </main>
 
   <!-- Modale d'information -->
