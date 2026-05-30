@@ -16,7 +16,9 @@
       --ink:         #2a2218;
       --ink-soft:    #5c4a35;
       --ink-muted:   #8a7560;
-      --c-mature:    #a04a3c;
+      --c-mature:    #a04a3c;   /* rouge terre brûlée - mâts */
+      --c-voiles:    #3d6b85;   /* bleu pétrole - voiles */
+      --c-super:     #5a7548;   /* vert olive - superstructures */
       --serif-display: "Cormorant Garamond", "Garamond", serif;
       --serif-body:    "EB Garamond", "Garamond", "Georgia", serif;
     }
@@ -164,8 +166,8 @@
       margin-top: -16px;
       border-radius: 50%;
       background: var(--paper-light);
-      border: 2px solid var(--c-mature);
-      color: var(--c-mature);
+      border: 2px solid var(--hotspot-color, var(--ink));
+      color: var(--hotspot-color, var(--ink));
       font-family: var(--serif-display);
       font-weight: 600;
       font-size: 15px;
@@ -178,6 +180,10 @@
       z-index: 5;
       animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
+
+    .hotspot[data-cat="mature"] { --hotspot-color: var(--c-mature); }
+    .hotspot[data-cat="voiles"] { --hotspot-color: var(--c-voiles); }
+    .hotspot[data-cat="super"]  { --hotspot-color: var(--c-super);  }
 
     @keyframes pop-in {
       from { transform: scale(0); opacity: 0; }
@@ -223,6 +229,7 @@
         0 25px 60px rgba(60, 40, 20, 0.3);
       animation: slide-up 0.35s cubic-bezier(0.34, 1.36, 0.64, 1);
       font-family: var(--serif-body);
+      border-top: 3px solid var(--modal-color, var(--c-mature));
     }
 
     @keyframes slide-up {
@@ -245,7 +252,7 @@
       justify-content: center;
       gap: 0.8rem;
       margin-bottom: 1.2rem;
-      color: var(--c-mature);
+      color: var(--modal-color, var(--c-mature));
       opacity: 0.6;
     }
     .modal-ornament .line { flex: 0 0 50px; height: 1px; background: currentColor; }
@@ -260,8 +267,8 @@
       height: 48px;
       border-radius: 50%;
       background: var(--paper-light);
-      border: 2px solid var(--c-mature);
-      color: var(--c-mature);
+      border: 2px solid var(--modal-color, var(--c-mature));
+      color: var(--modal-color, var(--c-mature));
       font-family: var(--serif-display);
       font-weight: 600;
       font-size: 22px;
@@ -306,7 +313,7 @@
       float: left;
       line-height: 0.85;
       margin: 0.1rem 0.5rem 0 0;
-      color: var(--c-mature);
+      color: var(--modal-color, var(--c-mature));
     }
 
     .modal p.description.empty {
@@ -436,9 +443,11 @@
 
   <script>
     const ANNOTATIONS = [
+      // === MÂTURE (rouge) ===
       {
         letter: "A",
         x: 33.0, y: 18.5,
+        cat: "mature",
         title: "Mât d\u2019artimon",
         subtitle: "mâture et gréement",
         description: "Situé à l\u2019extrémité arrière du navire, l\u2019artimon compte le plus souvent parmi les mâts les moins élevés. Il supporte la voilure arrière, dont le rôle demeure déterminant dans la manœuvre. Un réglage judicieux réduit les contraintes exercées sur la barre et favorise un comportement plus souple du bâtiment. Aussi hisse-t-on fréquemment cette voile seule, sans déployer le reste de la toile, lorsqu\u2019il faut faire virer le bâtiment ou le maintenir face au vent, notamment durant une mise à la cape ou au mouillage."
@@ -446,6 +455,7 @@
       {
         letter: "B",
         x: 43.8, y: 5.2,
+        cat: "mature",
         title: "Grand mât",
         subtitle: "mâture et gréement",
         description: "Le grand mât culmine au-dessus de l\u2019ensemble du gréement. Parce qu\u2019il supporte la plus grande surface de voilure, il intercepte davantage de vent que ses voisins et assure à lui seul le gros de la propulsion. Cette prééminence le soumet aux contraintes les plus fortes, ce qui signifie que sa solidité et son entretien conditionnent la sécurité du navire tout entier."
@@ -453,6 +463,7 @@
       {
         letter: "C",
         x: 66.2, y: 27.4,
+        cat: "mature",
         title: "Mât de misaine",
         subtitle: "mâture et gréement",
         description: "Planté à l\u2019avant du navire, le mât de misaine seconde le grand mât dans la propulsion. Il répartit la poussée vélique sur toute la longueur de la coque et maintient ainsi l\u2019équilibre de l\u2019ensemble. Lors des virements de bord, il prête en outre son concours à la manœuvre."
@@ -460,14 +471,91 @@
       {
         letter: "D",
         x: 90.7, y: 43.2,
+        cat: "mature",
         title: "Mât de beaupré",
         subtitle: "mâture et gréement",
         description: "Incliné au-dessus des flots, le beaupré pointe en avant de la coque. Sa première utilité consiste à déployer la toile vers la proue. Focs, voiles d\u2019étai et civadière y trouvent leur appui, ce qui affine l\u2019équilibre du bâtiment et renforce son aptitude à remonter au vent. Il offre par ailleurs un point d\u2019amarrage aux haubans du mât de misaine."
+      },
+
+      // === VOILURE (bleu) ===
+      {
+        letter: "E",
+        x: 27.0, y: 33.1,
+        cat: "voiles",
+        title: "Voile d\u2019artimon",
+        subtitle: "voilure",
+        description: "Établie sur le mât d\u2019artimon, à la poupe du navire, cette voile contribue principalement à l\u2019équilibre et à la manœuvrabilité du bâtiment. En complément du gouvernail, elle facilite les changements de cap et aide à maintenir une route stable, particulièrement lors des manœuvres."
+      },
+      {
+        letter: "F",
+        x: 35.5, y: 37.5,
+        cat: "voiles",
+        title: "Perroquet de fougue",
+        subtitle: "voilure",
+        description: "Fixé au mât d\u2019artimon, le perroquet de fougue capte le vent afin d\u2019accroître légèrement la vitesse du navire. Réservé aux conditions favorables, il procure un surcroît de propulsion lorsque la brise est modérée, mais doit être ferlé dès que le vent se renforce."
+      },
+      {
+        letter: "G",
+        x: 51.3, y: 33.8,
+        cat: "voiles",
+        title: "Grand-voile",
+        subtitle: "voilure",
+        description: "Véritable moteur du navire, la grand-voile constitue la pièce maîtresse du gréement. Grâce à sa vaste surface, elle capte l\u2019essentiel de l\u2019énergie du vent et fournit la majeure partie de la propulsion, déterminant en grande partie les performances du bâtiment sous voiles."
+      },
+      {
+        letter: "H",
+        x: 50.5, y: 18.3,
+        cat: "voiles",
+        title: "Grand perroquet",
+        subtitle: "voilure",
+        description: "Installé au sommet du grand mât, au-dessus de la grand-voile, le grand perroquet exploite les vents d\u2019altitude, généralement plus réguliers et soutenus que ceux qui soufflent près de la mer. Utilisé par temps clément, il améliore le rendement du gréement et permet de gagner de la vitesse lorsque le vent est faible. Il est toutefois replié dès que les conditions deviennent plus vigoureuses."
+      },
+      {
+        letter: "I",
+        x: 69.9, y: 54.0,
+        cat: "voiles",
+        title: "Civadière et contre-civadière",
+        subtitle: "voilure",
+        description: "Établies à l\u2019extrémité avant du navire, la civadière et la contre-civadière jouent un rôle essentiel dans l\u2019équilibre du gréement. En contrebalançant la poussée exercée par les voiles arrière, elles facilitent l\u2019orientation de la proue, améliorent la tenue du cap et contribuent à l\u2019efficacité des virements de bord. La contre-civadière, placée en complément de la civadière principale, renforce cette action et affine le contrôle du navire."
+      },
+
+      // === SUPERSTRUCTURES (vert) ===
+      {
+        letter: "J",
+        x: 26.9, y: 60.0,
+        cat: "super",
+        title: "Dunette",
+        subtitle: "superstructures",
+        description: "Plate-forme surélevée située à l\u2019arrière du navire, la dunette offre une vue dégagée sur l\u2019ensemble du bâtiment et sur les eaux environnantes. Traditionnellement réservée au capitaine, à ses officiers et aux instruments de navigation, elle constitue le centre de commandement du navire. Dans le cas présent, elle s\u2019organise sur deux niveaux : au sommet se trouve la cabine du capitaine, tandis que le niveau inférieur abrite le dortoir des officiers."
+      },
+      {
+        letter: "K",
+        x: 72.0, y: 68.7,
+        cat: "super",
+        title: "Gaillard d\u2019avant",
+        subtitle: "superstructures",
+        description: "Surélevé à l\u2019avant du navire, le gaillard d\u2019avant constitue un poste privilégié pour la surveillance et le combat. Autrefois occupé par les archers et les arbalétriers, troupes que Kul Tiras compte encore dans ses rangs, il accueille aujourd\u2019hui principalement l\u2019artillerie légère. Sa position dominante offre une vue dégagée sur l\u2019horizon, facilitant aussi bien le repérage des navires que celui des dangers à venir. C\u2019est également depuis ce pont que sont manœuvrés l\u2019ancre et ses apparaux."
+      },
+      {
+        letter: "L",
+        x: 95.1, y: 62.1,
+        cat: "super",
+        title: "Poulaine",
+        subtitle: "superstructures",
+        description: "Saillant à l\u2019avant du navire, la poulaine soutient la figure de proue qui veille sur le navire. C\u2019est également à cet endroit que l\u2019on installe traditionnellement les latrines de l\u2019équipage, leurs ouvertures donnant directement sur la mer afin d\u2019éloigner les immondices de la coque. La Coursécume fait toutefois exception : trop étroite, sa poulaine ne dispose pas de l\u2019espace nécessaire pour accueillir un tel dispositif."
       }
     ];
 
+    // Couleurs par catégorie pour la modale
+    const CAT_COLORS = {
+      mature: "var(--c-mature)",
+      voiles: "var(--c-voiles)",
+      super:  "var(--c-super)"
+    };
+
     const wrapper       = document.getElementById('shipWrapper');
     const modalBackdrop = document.getElementById('modalBackdrop');
+    const modal         = document.querySelector('.modal');
     const modalLetter   = document.getElementById('modalLetter');
     const modalTitle    = document.getElementById('modalTitle');
     const modalSubtitle = document.getElementById('modalSubtitle');
@@ -478,9 +566,10 @@
       const btn = document.createElement('button');
       btn.className = 'hotspot';
       btn.dataset.letter = item.letter;
+      btn.dataset.cat = item.cat;
       btn.style.left = item.x + '%';
       btn.style.top  = item.y + '%';
-      btn.style.animationDelay = (1200 + index * 100) + 'ms';
+      btn.style.animationDelay = (1200 + index * 80) + 'ms';
       btn.textContent = item.letter;
       btn.setAttribute('aria-label', item.letter + (item.title ? ' : ' + item.title : ''));
       btn.addEventListener('click', () => openModal(item));
@@ -490,6 +579,8 @@
     function openModal(item) {
       modalLetter.textContent = item.letter;
       modalTitle.textContent = item.title || '— à compléter —';
+      // Couleur de la catégorie
+      modal.style.setProperty('--modal-color', CAT_COLORS[item.cat] || 'var(--c-mature)');
       if (item.subtitle) {
         modalSubtitle.textContent = item.subtitle;
         modalSubtitle.style.display = '';
