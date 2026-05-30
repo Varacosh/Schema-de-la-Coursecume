@@ -19,6 +19,8 @@
       --c-mature:    #a04a3c;   /* rouge terre brûlée - mâts */
       --c-voiles:    #3d6b85;   /* bleu pétrole - voiles */
       --c-super:     #5a7548;   /* vert olive - superstructures */
+      --c-coque:     #7a4e85;   /* violet aubergine - coque, pont, ouvertures */
+      --c-elements:  #b87333;   /* ocre cuivré - éléments fonctionnels et ornementaux */
       --serif-display: "Cormorant Garamond", "Garamond", serif;
       --serif-body:    "EB Garamond", "Garamond", "Georgia", serif;
     }
@@ -181,9 +183,11 @@
       animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
-    .hotspot[data-cat="mature"] { --hotspot-color: var(--c-mature); }
-    .hotspot[data-cat="voiles"] { --hotspot-color: var(--c-voiles); }
-    .hotspot[data-cat="super"]  { --hotspot-color: var(--c-super);  }
+    .hotspot[data-cat="mature"]   { --hotspot-color: var(--c-mature); }
+    .hotspot[data-cat="voiles"]   { --hotspot-color: var(--c-voiles); }
+    .hotspot[data-cat="super"]    { --hotspot-color: var(--c-super);  }
+    .hotspot[data-cat="coque"]    { --hotspot-color: var(--c-coque);  }
+    .hotspot[data-cat="elements"] { --hotspot-color: var(--c-elements); }
 
     @keyframes pop-in {
       from { transform: scale(0); opacity: 0; }
@@ -543,14 +547,76 @@
         title: "Poulaine",
         subtitle: "superstructures",
         description: "Saillant à l\u2019avant du navire, la poulaine soutient la figure de proue qui veille sur le navire. C\u2019est également à cet endroit que l\u2019on installe traditionnellement les latrines de l\u2019équipage, leurs ouvertures donnant directement sur la mer afin d\u2019éloigner les immondices de la coque. La Coursécume fait toutefois exception : trop étroite, sa poulaine ne dispose pas de l\u2019espace nécessaire pour accueillir un tel dispositif."
+      },
+
+      // === COQUE, PONT ET OUVERTURES (violet) ===
+      {
+        letter: "M",
+        x: 21.0, y: 60.7,
+        cat: "coque",
+        title: "Fenêtres arrière",
+        subtitle: "coque, pont et ouvertures",
+        description: ""
+      },
+      {
+        letter: "N",
+        x: 32.3, y: 64.3,
+        cat: "coque",
+        title: "Bastingage",
+        subtitle: "coque, pont et ouvertures",
+        description: ""
+      },
+      {
+        letter: "O",
+        x: 56.0, y: 76.1,
+        cat: "coque",
+        title: "Pont principal",
+        subtitle: "coque, pont et ouvertures",
+        description: ""
+      },
+      {
+        letter: "P",
+        x: 64.4, y: 92.6,
+        cat: "coque",
+        title: "Carène",
+        subtitle: "coque, pont et ouvertures",
+        description: ""
+      },
+
+      // === ÉLÉMENTS FONCTIONNELS ET ORNEMENTAUX (ocre) ===
+      {
+        letter: "Q",
+        x: 15.0, y: 58.3,
+        cat: "elements",
+        title: "Tableau arrière",
+        subtitle: "éléments fonctionnels et ornementaux",
+        description: ""
+      },
+      {
+        letter: "R",
+        x: 84.5, y: 77.8,
+        cat: "elements",
+        title: "Ancre",
+        subtitle: "éléments fonctionnels et ornementaux",
+        description: ""
+      },
+      {
+        letter: "S",
+        x: 88.1, y: 68.7,
+        cat: "elements",
+        title: "Figure de proue",
+        subtitle: "éléments fonctionnels et ornementaux",
+        description: ""
       }
     ];
 
     // Couleurs par catégorie pour la modale
     const CAT_COLORS = {
-      mature: "var(--c-mature)",
-      voiles: "var(--c-voiles)",
-      super:  "var(--c-super)"
+      mature:   "var(--c-mature)",
+      voiles:   "var(--c-voiles)",
+      super:    "var(--c-super)",
+      coque:    "var(--c-coque)",
+      elements: "var(--c-elements)"
     };
 
     const wrapper       = document.getElementById('shipWrapper');
