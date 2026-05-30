@@ -16,7 +16,7 @@
       --ink:         #2a2218;
       --ink-soft:    #5c4a35;
       --ink-muted:   #8a7560;
-      --c-mature:    #a04a3c;   /* terre brûlée - mâts */
+      --c-mature:    #a04a3c;
       --serif-display: "Cormorant Garamond", "Garamond", serif;
       --serif-body:    "EB Garamond", "Garamond", "Georgia", serif;
     }
@@ -115,22 +115,30 @@
 
     .ship-section { animation: fade-up 1.2s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+    /* ========================================================
+       LE CONTENEUR DE L'IMAGE
+       ⚠️ aspect-ratio FORCÉ pour matcher exactement l'image originale (1679×937)
+       Sans ça, les % de positionnement des hotspots dérivent.
+       ======================================================== */
     .ship-wrapper {
       position: relative;
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
+      aspect-ratio: 1679 / 937;
       border: 1px solid rgba(90, 70, 45, 0.18);
       background: var(--paper);
       box-shadow:
         0 1px 2px rgba(60, 40, 20, 0.06),
         0 8px 30px rgba(60, 40, 20, 0.10);
+      overflow: hidden;
     }
 
     .ship-image {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: fill;  /* l'image remplit exactement le conteneur */
       user-select: none;
       -webkit-user-drag: none;
     }
@@ -183,7 +191,7 @@
     }
 
     /* ========================================================
-       MODALE STYLE ÉDITORIAL
+       MODALE
        ======================================================== */
     .modal-backdrop {
       position: fixed;
@@ -240,12 +248,8 @@
       color: var(--c-mature);
       opacity: 0.6;
     }
-    .modal-ornament .line {
-      flex: 0 0 50px;
-      height: 1px;
-      background: currentColor;
-    }
-    .modal-ornament .dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+    .modal-ornament .line { flex: 0 0 50px; height: 1px; background: currentColor; }
+    .modal-ornament .dot  { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
 
     .modal-letter {
       position: absolute;
@@ -274,7 +278,6 @@
       font-size: 2rem;
       color: var(--ink);
       text-align: center;
-      letter-spacing: -0.005em;
     }
 
     .modal .subtitle {
@@ -296,7 +299,6 @@
       min-height: 5rem;
     }
 
-    /* Lettrine sur la première lettre */
     .modal p.description::first-letter {
       font-family: var(--serif-display);
       font-size: 3.2rem;
@@ -307,7 +309,6 @@
       color: var(--c-mature);
     }
 
-    /* Style placeholder pour le texte vide */
     .modal p.description.empty {
       color: var(--ink-muted);
       font-style: italic;
@@ -416,7 +417,6 @@
 
   </main>
 
-  <!-- Modale -->
   <div class="modal-backdrop" id="modalBackdrop" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
@@ -435,39 +435,34 @@
   </div>
 
   <script>
-    // ============================================================
-    // DONNÉES DES POINTS D'ANNOTATION
-    // Pour ajouter du texte plus tard, remplir les champs title,
-    // subtitle et description de chaque entrée ci-dessous.
-    // ============================================================
     const ANNOTATIONS = [
       {
         letter: "A",
         x: 33.0, y: 18.5,
-        title: "",
-        subtitle: "",
-        description: ""
+        title: "Mât d\u2019artimon",
+        subtitle: "mâture et gréement",
+        description: "Situé à l\u2019extrémité arrière du navire, l\u2019artimon compte le plus souvent parmi les mâts les moins élevés. Il supporte la voilure arrière, dont le rôle demeure déterminant dans la manœuvre. Un réglage judicieux réduit les contraintes exercées sur la barre et favorise un comportement plus souple du bâtiment. Aussi hisse-t-on fréquemment cette voile seule, sans déployer le reste de la toile, lorsqu\u2019il faut faire virer le bâtiment ou le maintenir face au vent, notamment durant une mise à la cape ou au mouillage."
       },
       {
         letter: "B",
         x: 43.8, y: 5.2,
-        title: "",
-        subtitle: "",
-        description: ""
+        title: "Grand mât",
+        subtitle: "mâture et gréement",
+        description: "Le grand mât culmine au-dessus de l\u2019ensemble du gréement. Parce qu\u2019il supporte la plus grande surface de voilure, il intercepte davantage de vent que ses voisins et assure à lui seul le gros de la propulsion. Cette prééminence le soumet aux contraintes les plus fortes, ce qui signifie que sa solidité et son entretien conditionnent la sécurité du navire tout entier."
       },
       {
         letter: "C",
         x: 66.2, y: 27.4,
-        title: "",
-        subtitle: "",
-        description: ""
+        title: "Mât de misaine",
+        subtitle: "mâture et gréement",
+        description: "Planté à l\u2019avant du navire, le mât de misaine seconde le grand mât dans la propulsion. Il répartit la poussée vélique sur toute la longueur de la coque et maintient ainsi l\u2019équilibre de l\u2019ensemble. Lors des virements de bord, il prête en outre son concours à la manœuvre."
       },
       {
         letter: "D",
         x: 90.7, y: 43.2,
-        title: "",
-        subtitle: "",
-        description: ""
+        title: "Mât de beaupré",
+        subtitle: "mâture et gréement",
+        description: "Incliné au-dessus des flots, le beaupré pointe en avant de la coque. Sa première utilité consiste à déployer la toile vers la proue. Focs, voiles d\u2019étai et civadière y trouvent leur appui, ce qui affine l\u2019équilibre du bâtiment et renforce son aptitude à remonter au vent. Il offre par ailleurs un point d\u2019amarrage aux haubans du mât de misaine."
       }
     ];
 
@@ -479,7 +474,6 @@
     const modalDesc     = document.getElementById('modalDescription');
     const modalClose    = document.getElementById('modalClose');
 
-    // === Création des points d'annotation ===
     ANNOTATIONS.forEach((item, index) => {
       const btn = document.createElement('button');
       btn.className = 'hotspot';
@@ -493,22 +487,15 @@
       wrapper.appendChild(btn);
     });
 
-    // === Modale ===
     function openModal(item) {
       modalLetter.textContent = item.letter;
-
-      // Titre : valeur ou placeholder
       modalTitle.textContent = item.title || '— à compléter —';
-
-      // Sous-titre : valeur ou caché
       if (item.subtitle) {
         modalSubtitle.textContent = item.subtitle;
         modalSubtitle.style.display = '';
       } else {
         modalSubtitle.style.display = 'none';
       }
-
-      // Description : valeur normale ou placeholder italique
       if (item.description) {
         modalDesc.textContent = item.description;
         modalDesc.classList.remove('empty');
@@ -516,7 +503,6 @@
         modalDesc.textContent = 'Description à venir.';
         modalDesc.classList.add('empty');
       }
-
       modalBackdrop.hidden = false;
       modalClose.focus();
     }
